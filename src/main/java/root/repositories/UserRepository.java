@@ -1,24 +1,16 @@
 package root.repositories;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import root.entities.User;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
-@Transactional
-@Repository
-public class UserRepository {
-
-    private final EntityManager entityManager;
-
-    @Autowired
-    public UserRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    public void save(User user) {
-        this.entityManager.persist(user);
-    }
+public interface UserRepository {
+    List<User> getUsers();
+    User getUserById(Long id);
+    void save(User user);
+    void update(User user);
+    void delete(Long id);
+    boolean isExisting(String email);
+    void validateEmail(String email, BindingResult bindingResult);
 }

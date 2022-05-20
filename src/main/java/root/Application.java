@@ -2,17 +2,16 @@ package root;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import root.entities.User;
-import root.repositories.UserRepository;
+import root.repositories.UserRepositoryImpl;
 
 @SpringBootApplication
 public class Application {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(Application.class, args);
-		var userRepo = context.getBean(UserRepository.class);
+		var userRepo = context.getBean(UserRepositoryImpl.class);
 
-		userRepo.save(new User("Макс", 20, "max@mail.com"));
+		userRepo.getUsers().forEach(System.out::println);
 
 		context.close();
 	}
